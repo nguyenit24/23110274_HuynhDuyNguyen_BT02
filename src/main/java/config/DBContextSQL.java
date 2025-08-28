@@ -30,7 +30,7 @@ public class DBContextSQL {
 			stmt.executeUpdate("INSERT INTO SinhVien(id, username, email) "
 					+ "VALUES (1, 'Trung', '@WW')");
 			ResultSet rs = stmt.executeQuery("SELECT * FROM SinhVien");
-			// show data
+			
 			while (rs.next()) {
 				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
 			}

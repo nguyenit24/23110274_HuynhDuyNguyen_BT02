@@ -14,8 +14,6 @@
 		<c:if test="${alert != null}">
 			<h3 class="alert alert-danger">${alert}</h3>
 		</c:if>
-
-		<!-- Email -->
 		<section>
 			<label class="input login-input">
 				<div class="input-group">
@@ -26,7 +24,6 @@
 			</label>
 		</section>
 
-		<!-- Username -->
 		<section>
 			<label class="input login-input">
 				<div class="input-group">
@@ -37,7 +34,6 @@
 			</label>
 		</section>
 
-		<!-- Full name -->
 		<section>
 			<label class="input login-input">
 				<div class="input-group">
@@ -48,7 +44,6 @@
 			</label>
 		</section>
 
-		<!-- Password -->
 		<section>
 			<label class="input login-input">
 				<div class="input-group">
@@ -59,19 +54,6 @@
 			</label>
 		</section>
 
-		<!-- Avatar (link ảnh) -->
-	<!--  <section>
-			<label class="input login-input">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-image"></i></span>
-					<input type="text" placeholder="Link ảnh đại diện" name="avatar"
-						class="form-control">
-				</div>
-			</label>
-		</section>
-	-->	
-
-		<!-- Phone -->
 		<section>
 			<label class="input login-input">
 				<div class="input-group">
@@ -82,17 +64,7 @@
 			</label>
 		</section>
 
-		<!-- Created Date -->
-		<!--<section>
-			<label class="input login-input">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-					<input type="date" name="createdDate" class="form-control">
-				</div>
-			</label>
-		</section>
-
-		<!-- Submit -->
+	
 		<section>
 			<button type="submit" class="btn btn-primary">Đăng ký</button>
 		</section>
