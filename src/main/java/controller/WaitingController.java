@@ -36,14 +36,14 @@ public class WaitingController extends HttpServlet {
 		User u=(User) session.getAttribute("account");
 		request.setAttribute("username", u.getUserName());
 		if(u.getRoleid()==1) {
-			response.sendRedirect(request.getContextPath()+"/admin/home");
+			response.sendRedirect(request.getContextPath()+"/views/admin/home.jsp");
 		}else if(u.getRoleid()==2) {
-			response.sendRedirect(request.getContextPath()+"/manager/home");
+			response.sendRedirect(request.getContextPath()+"/views/manager/home");
 		}else {
-			response.sendRedirect(request.getContextPath()+"/home");
+			response.sendRedirect(request.getContextPath()+"/views/home.jsp");
 		}
 		}else {
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/views/login.jsp");
 		}
 	}
 

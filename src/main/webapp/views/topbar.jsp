@@ -12,7 +12,7 @@
 		<c:when test="${sessionScope.account == null}">
 			<div class="col-sm-6">
 				<ul class="list-inline right-topbar pull-right">
-					<li>< a href="${pageContext.request.contextPath }/login">Đăng
+					<li>< a href="${pageContext.request.contextPath }/view/login">Đăng
 						nhập</a> | <a href="${pageContext.request.contextPath }/register">Đăng
 							ký</a>
 					</li>
