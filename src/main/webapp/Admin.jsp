@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Home</title>
+<title>ADMIN</title>
 </head>
 <body>
-    <h1>Welcome to Admin Home Page</h1>
-    <p>This is a placeholder for admin functionalities.</p>
-    
+
 </body>
 </html>

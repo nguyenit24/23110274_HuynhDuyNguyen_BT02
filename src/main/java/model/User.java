@@ -75,10 +75,9 @@ public class User implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public User(int id, String email, String userName, String fullName, String passWord, String avatar, int roleid,
+	public User(String email, String userName, String fullName, String passWord, String avatar, int roleid,
 			String phone, Date createdDate) {
 		super();
-		this.id = id;
 		this.email = email;
 		this.userName = userName;
 		this.fullName = fullName;
