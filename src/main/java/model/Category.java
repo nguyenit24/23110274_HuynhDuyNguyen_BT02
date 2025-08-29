@@ -1,43 +1,48 @@
 package model;
 
 public class Category {
-	private int id;
-	private String name;
-	private String icon;
-	
-	public Category(int id, String name, String icon) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.icon = icon;
-	}
+    private int categoryid;
+    private String categoryname;
+    private String images;
+    private int status;
 
-	public int getId() {
-		return id;
-	}
+    public Category() {
+    }
+    public Category(int categoryid, String categoryname, String images, int status) {
+        this.categoryid = categoryid;
+        this.categoryname = categoryname;
+        this.images = images;
+        this.status = status;
+    }
+    public int getCategoryid() {
+        return categoryid;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setCategoryid(int categoryid) {
+        this.categoryid = categoryid;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getCategoryname() {
+        return categoryname;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setCategoryname(String categoryname) {
+        this.categoryname = categoryname;
+    }
 
-	public String getIcon() {
-		return icon;
-	}
+    public String getImages() {
+        return images;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public void setImages(String images) {
+        this.images = images;
+    }
 
-	public Category() {
-		super();
-	}
-	
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

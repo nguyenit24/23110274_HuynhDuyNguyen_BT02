@@ -36,24 +36,24 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(false);
-		if (session != null && session.getAttribute("username") != null) {
-			response.sendRedirect(request.getContextPath() + "/admin");
-			return;
-		}
-
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("username")) {
-					session = request.getSession(true);
-					session.setAttribute("username", cookie.getValue());
-					response.sendRedirect(request.getContextPath() + "/admin");
-					return;
-				}
-			}
-		}
+//		// TODO Auto-generated method stub
+//		HttpSession session = request.getSession(false);
+//		if (session != null && session.getAttribute("username") != null) {
+//			response.sendRedirect(request.getContextPath() + "/admin");
+//			return;
+//		}
+//
+//		Cookie[] cookies = request.getCookies();
+//		if (cookies != null) {
+//			for (Cookie cookie : cookies) {
+//				if (cookie.getName().equals("username")) {
+//					session = request.getSession(true);
+//					session.setAttribute("username", cookie.getValue());
+//					response.sendRedirect(request.getContextPath() + "/admin");
+//					return;
+//				}
+//			}
+//		}
 		request.getRequestDispatcher("/views/register.jsp").forward(request, response);
 	}
 

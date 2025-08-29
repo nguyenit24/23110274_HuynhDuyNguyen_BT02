@@ -10,16 +10,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Category;
-import service.CategoryService;
+import service.ICategoryService;
 import service.impl.CategoryServiceImpl;
 
 /**
  * Servlet implementation class CategoryController
  */
-@WebServlet(urlPatterns = { "/admin/category/list" })
+@WebServlet(urlPatterns = { "/admin/categories" })
 public class CategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private CategoryService cateService = new CategoryServiceImpl();
+    private ICategoryService cateService = new CategoryServiceImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,11 +32,9 @@ public class CategoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Category> cateList = cateService.getAll();
-		request.setAttribute("cateList", cateList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/listcategory.jsp");
-		dispatcher.forward(request, response);
-		
+        List<Category> lists = cateService.getAll();
+        request.setAttribute("cateList", lists);
+        request.getRequestDispatcher("/views/admin/listcategory.jsp").forward(request, response);
 	}
 
 	/**

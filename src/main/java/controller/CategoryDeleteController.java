@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.CategoryService;
+import service.ICategoryService;
 import service.impl.CategoryServiceImpl;
 
 /**
@@ -16,7 +16,7 @@ import service.impl.CategoryServiceImpl;
 @WebServlet(urlPatterns = { "/admin/category/delete" })
 public class CategoryDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-		private CategoryService cateService = new CategoryServiceImpl();
+		private ICategoryService cateService = new CategoryServiceImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
