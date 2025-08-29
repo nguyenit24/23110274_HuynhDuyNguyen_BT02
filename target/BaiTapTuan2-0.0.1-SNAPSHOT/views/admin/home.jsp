@@ -47,7 +47,7 @@
     <h4 class="text-center">Admin</h4>
     <p class="text-center">Xin chào, <%= u.getUserName() %></p>
     <a href="<%=request.getContextPath()%>/admin/home.jsp">🏠 Dashboard</a>
-    <a href="<%=request.getContextPath()%>/category/list">📂 Category</a>
+    <a href="<%=request.getContextPath()%>/admin/categories">📂 Category</a>
     <a href="<%=request.getContextPath()%>/product/list">📦 Product</a>
     <a href="<%=request.getContextPath()%>/user/list">👤 User</a>
     <a href="<%=request.getContextPath()%>/logout">🚪 Logout</a>

@@ -1,25 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Add</title>
+    <meta charset="UTF-8">
+    <title>Add Category</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<c:forEach items="${cateList}" var="cate" varStatus="STT">
-		<tr class="odd gradeX">
-			<td>${STT.index+1 }</td>
-			<c:url value="/image?fname=${cate.icon }" var="imgUrl"></c:url>
-			<td><img height="150" width="200" src="${imgUrl}" /></td>
-			<td>${cate.name }</td>
-			<td><a
-				href="<c:url value='/admin/category/edit?id=${cate.id }'/>"
-				class="center">Sửa</a> | <a
-				href="<c:url value='/admin/category/delete?id=${cate.id }'/>"
-				class="center">Xóa</a></td>
-		</tr>
-	</c:forEach>
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Category</h2>
+
+    <!-- Form add category -->
+    <form action="<c:url value='/admin/category/insert'/>" method="post">
+        <div class="mb-3">
+            <label for="categoryname" class="form-label">Category Name</label>
+            <input type="text" class="form-control" id="categoryname" name="categoryname" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status">
+                <option value="1">Hoạt động</option>
+                <option value="0">Khóa</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="<c:url value='/admin/categories'/>" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
