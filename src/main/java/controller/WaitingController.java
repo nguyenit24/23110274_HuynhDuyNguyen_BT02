@@ -1,3 +1,5 @@
+
+
 package controller;
 
 import java.io.IOException;
@@ -34,6 +36,7 @@ public class WaitingController extends HttpServlet {
 		HttpSession session= request.getSession();
 		if(session != null && session.getAttribute("account") != null) {
 		User u=(User) session.getAttribute("account");
+		request.setAttribute("accout", u);
 		request.setAttribute("username", u.getUserName());
 		if(u.getRoleid()==1) {
 			response.sendRedirect(request.getContextPath()+"/views/admin/home.jsp");

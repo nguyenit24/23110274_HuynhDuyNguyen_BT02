@@ -1,0 +1,12 @@
+service\impl\UserServiceImpl.class
+controller\WaitingController.class
+dao\impl\UserDaoImpl.class
+controller\LoginController.class
+controller\Logout.class
+controller\Admin.class
+service\UserService.class
+dao\UserDao.class
+config\DBContextSQL.class
+controller\RegisterController.class
+controller\ForgetPassController.class
+model\User.class
