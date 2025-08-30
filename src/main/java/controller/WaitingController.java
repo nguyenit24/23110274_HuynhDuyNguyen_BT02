@@ -35,16 +35,15 @@ public class WaitingController extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
 		if(session != null && session.getAttribute("account") != null) {
-		User u=(User) session.getAttribute("account");
-		request.setAttribute("accout", u);
-		request.setAttribute("username", u.getUserName());
-		if(u.getRoleid()==1) {
-			response.sendRedirect(request.getContextPath()+"/views/admin/home.jsp");
-		}else if(u.getRoleid()==2) {
-			response.sendRedirect(request.getContextPath()+"/views/manager/home");
-		}else {
-			response.sendRedirect(request.getContextPath()+"/views/home.jsp");
-		}
+            User u=(User) session.getAttribute("account");
+            request.setAttribute("accout", u);
+            request.setAttribute("username", u.getUserName());
+            if(u.getRoleid()==1) {
+                response.sendRedirect(request.getContextPath() + "/views/admin/home.jsp");
+            }
+            else {
+                response.sendRedirect(request.getContextPath()+"/views/home.jsp");
+            }
 		}else {
 			response.sendRedirect(request.getContextPath()+"/views/login.jsp");
 		}

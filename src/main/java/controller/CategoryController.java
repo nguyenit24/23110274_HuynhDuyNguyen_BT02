@@ -1,23 +1,30 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import model.Category;
 import service.ICategoryService;
 import service.impl.CategoryServiceImpl;
+import util.Constant;
 
 /**
  * Servlet implementation class CategoryController
  */
 //@WebServlet(urlPatterns = { "/admin/categories" , "/admin/category/add" , "/admin/category/edit" , "/admin/category/insert" })
-
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+    maxFileSize = 1024 * 1024 * 10,      // 10MB
+    maxRequestSize = 1024 * 1024 * 50 )
 @WebServlet(urlPatterns = { "/admin/categories" , "/admin/category/add" , "/admin/category/edit" , "/admin/category/insert"  , "/admin/category/update", "/admin/category/delete"} )
 public class CategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -64,24 +71,64 @@ public class CategoryController extends HttpServlet {
 
         if(uri.contains("insert")) {
             Category category = new Category();
-
             category.setCategoryname(request.getParameter("categoryname"));
             category.setImages("1.jpg");
             category.setStatus(Integer.parseInt(request.getParameter("status")));
+
+            // upload file image
+            String fname = "";
+            String uploadPath = Constant.DIR;
+            File uploadDir = new File(uploadPath);
+            if(!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            try {
+                Part filePart = request.getPart("image");
+                if(filePart.getSize() > 0) {
+                    fname = filePart.getSubmittedFileName();
+                    int index = fname.lastIndexOf(".");
+                    String ext = fname.substring(index);
+                    fname = System.currentTimeMillis() + ext;
+                    filePart.write(uploadPath + File.separator + fname);
+                    category.setImages(fname);
+                } else {
+                    category.setImages("1.jpg");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             cateService.insert(category);
             response.sendRedirect(request.getContextPath() + "/admin/categories");
         } else if (uri.contains("update")) {
-            System.out.println(request.getParameter("categoryname"));
-            System.out.println(request.getParameter("image"));
-            System.out.println(request.getParameter("status"));
-            System.out.println(request.getParameter("categoryid"));
             Category category = new Category();
             category.setCategoryid(Integer.parseInt(request.getParameter("categoryid")));
             category.setCategoryname(request.getParameter("categoryname"));
-            category.setImages("1.jpg");
-            category.setStatus(Integer.parseInt(request.getParameter("status")));
-            System.out.println(category.getCategoryid() + category.getCategoryname() + category.getStatus()+ category.getImages());
 
+            Category oldCate = cateService.get(category.getCategoryid());
+
+            // upload file image
+            String fname = "";
+            String uploadPath = Constant.DIR;
+            File uploadDir = new File(uploadPath);
+            if(!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            try {
+                Part filePart = request.getPart("image");
+                if(filePart.getSize() > 0) {
+                    fname = filePart.getSubmittedFileName();
+                    int index = fname.lastIndexOf(".");
+                    String ext = fname.substring(index);
+                    fname = System.currentTimeMillis() + ext;
+                    filePart.write(uploadPath + File.separator + fname);
+                    category.setImages(fname);
+                } else {
+                    category.setImages(oldCate.getImages());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            category.setStatus(Integer.parseInt(request.getParameter("status")));
             cateService.update(category);
             response.sendRedirect(request.getContextPath() + "/admin/categories");
         } else if (uri.contains("delete")) {

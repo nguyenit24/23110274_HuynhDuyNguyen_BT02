@@ -12,7 +12,7 @@
     <h2 class="mb-4">Edit Category</h2>
 
     <!-- Form edit category -->
-    <form action="<c:url value='/admin/category/update'/>" method="post">
+    <form action="<c:url value='/admin/category/update'/>" method="post" enctype="multipart/form-data">
 
         <input id="categoryid" name="categoryid" value="${cate.categoryid}" />
 
