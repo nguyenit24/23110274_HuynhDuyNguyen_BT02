@@ -14,7 +14,7 @@
     <!-- Form edit category -->
     <form action="<c:url value='/admin/category/update'/>" method="post" enctype="multipart/form-data">
 
-        <input id="categoryid" name="categoryid" value="${cate.categoryid}" />
+        <input  id="categoryid" name="categoryid" value="${cate.categoryid}"  type="hidden"/>
 
         <div class="mb-3">
             <label for="categoryname" class="form-label">Category Name</label>

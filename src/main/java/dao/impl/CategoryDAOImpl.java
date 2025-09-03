@@ -14,13 +14,14 @@ public class CategoryDAOImpl extends DBContextSQL implements ICategoryDAO {
 
     @Override
     public void insert(Category category) {
-        String sql = "INSERT INTO Category(categoryname, images, status) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO Category(categoryname, images, status , user_id) VALUES(?, ?, ?, ?)";
         try {
             Connection con = super.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, category.getCategoryname());
             ps.setString(2, category.getImages());
             ps.setInt(3, category.getStatus());
+            ps.setInt(4, category.getUser_id());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,6 +91,29 @@ public class CategoryDAOImpl extends DBContextSQL implements ICategoryDAO {
     public List<Category> getAll() {
         List<Category> categories = new ArrayList<Category>();
         String sql = "SELECT * FROM Category";
+        try {
+            Connection conn = super.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Category category = new Category();
+                category.setCategoryid(rs.getInt("categoryid"));
+                category.setCategoryname(rs.getString("categoryname"));
+                category.setImages(rs.getString("images"));
+                category.setStatus(rs.getInt("status"));
+                categories.add(category);
+            }
+            return categories;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Category> getAll(String user_id) {
+        List<Category> categories = new ArrayList<Category>();
+        String sql = "SELECT * FROM Category WHERE user_id = " + user_id;
         try {
             Connection conn = super.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

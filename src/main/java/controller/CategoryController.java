@@ -2,17 +2,16 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.http.*;
 import model.Category;
+import model.User;
 import service.ICategoryService;
 import service.impl.CategoryServiceImpl;
 import util.Constant;
@@ -29,6 +28,7 @@ import util.Constant;
 public class CategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ICategoryService cateService = new CategoryServiceImpl();
+    private User user = new User();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,11 +43,15 @@ public class CategoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
         if(request.getRequestURI().contains("/admin/categories")) {
-            List<Category> lists = cateService.getAll();
-            request.setAttribute("cateList", lists);
+//            List<Category> lists = cateService.getAll();
+            List<Category> categories = cateService.getAll(String.valueOf(user.getId()));
+            request.setAttribute("cateList", categories);
             request.getRequestDispatcher("/views/admin/listcategory.jsp").forward(request, response);
         } else if (request.getRequestURI().contains("add")) {
+            System.out.println(user.getId() );
             request.getRequestDispatcher("/views/admin/addcategory.jsp").forward(request, response);
         } else if (request.getRequestURI().contains("edit")) {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -68,14 +72,14 @@ public class CategoryController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String uri = request.getRequestURI();
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
         if(uri.contains("insert")) {
             Category category = new Category();
             category.setCategoryname(request.getParameter("categoryname"));
             category.setImages("1.jpg");
             category.setStatus(Integer.parseInt(request.getParameter("status")));
-
-            // upload file image
+            category.setUser_id(user.getId());
             String fname = "";
             String uploadPath = Constant.DIR;
             File uploadDir = new File(uploadPath);
@@ -103,7 +107,7 @@ public class CategoryController extends HttpServlet {
             Category category = new Category();
             category.setCategoryid(Integer.parseInt(request.getParameter("categoryid")));
             category.setCategoryname(request.getParameter("categoryname"));
-
+            category.setUser_id(user.getId());
             Category oldCate = cateService.get(category.getCategoryid());
 
             // upload file image

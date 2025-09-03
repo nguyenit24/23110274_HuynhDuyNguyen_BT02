@@ -5,14 +5,21 @@ public class Category {
     private String categoryname;
     private String images;
     private int status;
-
+    private int user_id;
     public Category() {
     }
-    public Category(int categoryid, String categoryname, String images, int status) {
+    public Category(int categoryid, String categoryname, String images, int status,int user_id) {
         this.categoryid = categoryid;
         this.categoryname = categoryname;
         this.images = images;
         this.status = status;
+        this.user_id=user_id;
+    }
+    public int getUser_id() {
+        return user_id;
+    }
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
     public int getCategoryid() {
         return categoryid;

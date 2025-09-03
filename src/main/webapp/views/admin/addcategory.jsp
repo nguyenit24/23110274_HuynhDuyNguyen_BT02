@@ -13,6 +13,9 @@
 
     <!-- Form add category -->
     <form action="<c:url value='/admin/category/insert'/>" method="post" enctype="multipart/form-data">
+
+
+
         <div class="mb-3">
             <label for="categoryname" class="form-label">Category Name</label>
             <input type="text" class="form-control" id="categoryname" name="categoryname" required>

@@ -55,4 +55,9 @@ public class CategoryServiceImpl implements ICategoryService {
         return categoryDao.search(keyword);
     }
 
+    @Override
+    public List<Category> getAll(String user_id) {
+        return categoryDao.getAll(user_id);
+    }
+
 }

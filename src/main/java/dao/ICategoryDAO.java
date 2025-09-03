@@ -11,5 +11,8 @@ public interface ICategoryDAO {
     Category get(int id);
     Category get(String name);
     List<Category> getAll();
+
+    List<Category> getAll(String user_id);
+
     List<Category> search(String keyword);
 }
